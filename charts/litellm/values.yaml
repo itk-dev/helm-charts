@@ -89,22 +89,11 @@ masterkeySecretKey: ""
 #  Reference: https://docs.litellm.ai/docs/proxy/configs
 proxy_config:
   model_list:
-    - model_name: Mistral-Large
-      litellm_params:
-        model: azure_ai/Mistral-Large-2411
-        api_base: https://Mistral-Large-2411-ITK.swedencentral.models.ai.azure.com/
-        api_key: M9LTM36L6XWiyyNbxiSQOC8yarOY6EOK
-    - model_name: gpt-4o
-      litellm_params:
-        model: azure_ai/gpt-4o
-        api_base: https://itkai-caiaa-ai-services.services.ai.azure.com/
-        api_key: 77FzFWwtulfdH1uSQglZCC358cmmT76CboQ9IsUI52OVLtW5fWJZJQQJ99BAACfhMk5XJ3w3AAAAACOGSe5U
-        api_version: "2024-10-21"
     - model_name: Mistral-7b
       litellm_params:
         model: openai/mistralai/Mistral-7B-Instruct-v0.3
-        api_key: 323786582ce127950e32bc781482b4a2
-        api_base: https://vllm.srvitkcaiaavllm01.itkdev.dk/v1
+        api_key: xxxxx
+        api_base: https://xxxx/v1
   general_settings:
     master_key: os.environ/PROXY_MASTER_KEY
 
