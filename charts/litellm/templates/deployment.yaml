@@ -44,22 +44,6 @@ spec:
               value: "{{ .Values.listen | default "0.0.0.0" }}"
             - name: PORT
               value: {{ .Values.service.port | quote}}
-            {{- if .Values.db.deployStandalone }}
-            - name: DATABASE_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "litellm.fullname" . }}-dbcredentials
-                  key: username
-            - name: DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "litellm.fullname" . }}-dbcredentials
-                  key: password
-            - name: DATABASE_HOST
-              value: {{ .Release.Name }}-postgresql
-            - name: DATABASE_NAME
-              value: litellm
-            {{- else if .Values.db.useExisting }}
             - name: DATABASE_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -76,7 +60,6 @@ spec:
               value: {{ .Values.db.database }}
             - name: DATABASE_URL
               value: {{ .Values.db.url | quote }}
-            {{- end }}
             - name: PROXY_MASTER_KEY
               valueFrom:
                 secretKeyRef:
