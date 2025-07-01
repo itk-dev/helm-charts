@@ -136,9 +136,6 @@ tolerations: []
 affinity: {}
 
 db:
-  # Use an existing postgres server/cluster
-  useExisting: false
-
   # How to connect to the existing postgres server/cluster
   endpoint: localhost
   database: litellm

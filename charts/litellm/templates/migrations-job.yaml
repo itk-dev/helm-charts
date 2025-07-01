@@ -26,7 +26,6 @@ spec:
           command: ["python", "litellm/proxy/prisma_migration.py"]
           workingDir: "/app"
           env:
-            {{- if .Values.db.useExisting }}
             - name: DATABASE_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -43,10 +42,6 @@ spec:
               value: {{ .Values.db.database }}
             - name: DATABASE_URL
               value: {{ .Values.db.url | quote }}
-            {{- else }}
-            - name: DATABASE_URL
-              value: postgresql://{{ .Values.postgresql.auth.username }}:{{ .Values.postgresql.auth.password }}@{{ .Release.Name }}-postgresql/{{ .Values.postgresql.auth.database }}
-            {{- end }}
             - name: DISABLE_SCHEMA_UPDATE
               value: "false" # always run the migration from the Helm PreSync hook, override the value set
           {{- with .Values.volumeMounts }}
