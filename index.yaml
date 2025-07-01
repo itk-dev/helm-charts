@@ -3,6 +3,16 @@ entries:
   litellm:
   - apiVersion: v2
     appVersion: v1.50.2
+    created: "2025-07-01T10:52:53.383492963Z"
+    description: Call all LLM APIs using the OpenAI format
+    digest: bb0fb0b40e412c2e335aecded3bafb565826b2cc306e0fdb4e2ea644e5533640
+    name: litellm
+    type: application
+    urls:
+    - https://github.com/itk-dev/helm-charts/releases/download/litellm-0.0.6/litellm-0.0.6.tgz
+    version: 0.0.6
+  - apiVersion: v2
+    appVersion: v1.50.2
     created: "2025-07-01T10:46:13.903784387Z"
     description: Call all LLM APIs using the OpenAI format
     digest: baed1afcc4254e47e220d9bc0710c09a69111fd0a8dfdfa80e03718c09c49d41
@@ -70,4 +80,4 @@ entries:
     urls:
     - https://github.com/itk-dev/helm-charts/releases/download/litellm-helm-0.0.1/litellm-helm-0.0.1.tgz
     version: 0.0.1
-generated: "2025-07-01T10:46:13.903803272Z"
+generated: "2025-07-01T10:52:53.383710452Z"
