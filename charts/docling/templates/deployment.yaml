@@ -40,7 +40,7 @@ spec:
           {{- toYaml .Values.resources | nindent 10 }}
         readinessProbe:
           httpGet:
-            path: /
+            path: /docs
             port: {{ .Values.service.targetPort }}
           initialDelaySeconds: {{ .Values.healthCheck.readiness.initialDelaySeconds }}
           periodSeconds: {{ .Values.healthCheck.readiness.periodSeconds }}
@@ -48,7 +48,7 @@ spec:
           failureThreshold: {{ .Values.healthCheck.readiness.failureThreshold }}
         livenessProbe:
           httpGet:
-            path: /
+            path: /docs
             port: {{ .Values.service.targetPort }}
           initialDelaySeconds: {{ .Values.healthCheck.liveness.initialDelaySeconds }}
           periodSeconds: {{ .Values.healthCheck.liveness.periodSeconds }}
