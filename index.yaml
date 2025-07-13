@@ -1,5 +1,28 @@
 apiVersion: v1
 entries:
+  docling:
+  - annotations:
+      licenses: MIT
+    apiVersion: v2
+    appVersion: 0.16.0
+    created: "2025-07-13T13:53:22.893759108Z"
+    description: Docling document processing service for Kubernetes
+    digest: 34292f775874ea3d136f7c51fef246a3a3da6ac22b7574ee7a915f15b2e1bea8
+    home: https://github.com/docling-project/docling
+    keywords:
+    - document
+    - processing
+    - pdf
+    - extraction
+    - ai
+    name: docling
+    sources:
+    - https://github.com/docling-project/docling
+    - https://quay.io/repository/docling-project/docling-serve
+    type: application
+    urls:
+    - https://github.com/itk-dev/helm-charts/releases/download/docling-0.0.1/docling-0.0.1.tgz
+    version: 0.0.1
   litellm:
   - apiVersion: v2
     appVersion: v1.50.2
@@ -80,4 +103,4 @@ entries:
     urls:
     - https://github.com/itk-dev/helm-charts/releases/download/litellm-helm-0.0.1/litellm-helm-0.0.1.tgz
     version: 0.0.1
-generated: "2025-07-01T10:52:53.383710452Z"
+generated: "2025-07-13T13:53:22.893777202Z"
