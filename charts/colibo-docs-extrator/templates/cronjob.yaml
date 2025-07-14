@@ -1,0 +1,87 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "colibo-docs-extractor.fullname" . }}
+  labels:
+    {{- include "colibo-docs-extractor.labels" . | nindent 4 }}
+spec:
+  schedule: {{ .Values.schedule | quote }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          {{- with .Values.podAnnotations }}
+          annotations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          labels:
+            {{- include "colibo-docs-extractor.selectorLabels" . | nindent 12 }}
+        spec:
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          restartPolicy: OnFailure
+          containers:
+            - name: {{ .Chart.Name }}
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              args: ["sync"]
+              env:
+                {{- if .Values.env }}
+                  {{- toYaml .Values.env | nindent 16 }}
+                {{- end }}
+              resources:
+                {{- toYaml .Values.resources | nindent 16 }}
+              volumeMounts:
+                {{- if .Values.volumes.envFile.enabled }}
+                - name: env-file
+                  mountPath: /app/.env
+                  subPath: .env
+                {{- end }}
+                {{- if .Values.volumes.syncDb.enabled }}
+                - name: sync-db
+                  mountPath: /app/sync.db
+                {{- end }}
+          volumes:
+            {{- if .Values.volumes.envFile.enabled }}
+            - name: env-file
+              {{- if .Values.volumes.envFile.existingConfigMap }}
+              configMap:
+                name: {{ .Values.volumes.envFile.existingConfigMap }}
+              {{- else if .Values.envSecret.enabled }}
+              secret:
+                secretName: {{ include "colibo-docs-extractor.fullname" . }}-env
+              {{- else }}
+              configMap:
+                name: {{ include "colibo-docs-extractor.fullname" . }}-env
+              {{- end }}
+            {{- end }}
+            {{- if .Values.volumes.syncDb.enabled }}
+            - name: sync-db
+            {{- if .Values.volumes.syncDb.persistentVolumeClaim.enabled }}
+              persistentVolumeClaim:
+                {{- if .Values.volumes.syncDb.persistentVolumeClaim.existingClaim }}
+                claimName: {{ .Values.volumes.syncDb.persistentVolumeClaim.existingClaim }}
+                {{- else }}
+                claimName: {{ include "colibo-docs-extractor.fullname" . }}-sync-db
+              {{- end }}
+            {{- else if .Values.volumes.syncDb.emptyDir.enabled }}
+            emptyDir: {}
+            {{- end }}
+            {{- end }}
+          {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.affinity }}
+          affinity:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}

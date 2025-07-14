@@ -1,0 +1,11 @@
+{{- if and .Values.volumes.envFile.enabled (not .Values.volumes.envFile.existingConfigMap) (not .Values.envSecret.enabled) }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "colibo-docs-extractor.fullname" . }}-env
+  labels:
+    {{- include "colibo-docs-extractor.labels" . | nindent 4 }}
+data:
+  .env: |-
+    {{- .Values.volumes.envFile.envFileContent | nindent 4 }}
+{{- end }}

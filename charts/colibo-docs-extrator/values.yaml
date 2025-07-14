@@ -1,0 +1,61 @@
+# Default values for colibo-docs-extractor
+image:
+  repository: colibo-document-extrator
+  tag: latest
+  pullPolicy: IfNotPresent
+
+schedule: "0 * * * *"  # Run every hour by default
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+
+volumes:
+  envFile:
+    enabled: true
+    # You can either use existing ConfigMap/Secret or provide env file content
+    existingConfigMap: ""
+    envFileContent: ""
+
+  syncDb:
+    enabled: true
+    # Use PVC for persistent storage
+    persistentVolumeClaim:
+      enabled: true
+      existingClaim: ""
+      storageClassName: ""
+      size: 10mb
+    # Or use emptyDir for non-persistent storage
+    emptyDir:
+      enabled: false
+
+env: []
+# - name: EXAMPLE_VAR
+#   value: "example-value"
+# - name: SECRET_VAR
+#   valueFrom:
+#     secretKeyRef:
+#       name: my-secret
+#       key: secret-key
+
+# If you want to store .env file content as a Secret
+envSecret:
+  enabled: false
+  # content is base64 encoded content of .env file
+  content: ""
+
+# If you need to pull image from private registry
+imagePullSecrets: []
+# - name: regcred
+
+podAnnotations: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

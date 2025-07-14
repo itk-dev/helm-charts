@@ -1,0 +1,19 @@
+{{- if .Values.volumes.syncDb.enabled -}}
+{{- if and .Values.volumes.syncDb.persistentVolumeClaim.enabled (not .Values.volumes.syncDb.persistentVolumeClaim.existingClaim) }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "colibo-docs-extractor.fullname" . }}-sync-db
+  labels:
+    {{- include "colibo-docs-extractor.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  {{- if .Values.volumes.syncDb.persistentVolumeClaim.storageClassName }}
+  storageClassName: {{ .Values.volumes.syncDb.persistentVolumeClaim.storageClassName }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.volumes.syncDb.persistentVolumeClaim.size }}
+{{- end }}
+{{- end }}
