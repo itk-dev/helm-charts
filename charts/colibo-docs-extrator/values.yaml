@@ -6,6 +6,8 @@ image:
 
 schedule: "0 * * * *"  # Run every hour by default
 
+args: ["sync"]
+
 resources:
   limits:
     cpu: 500m
