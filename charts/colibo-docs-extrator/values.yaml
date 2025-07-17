@@ -1,6 +1,6 @@
 # Default values for colibo-docs-extractor
 image:
-  repository: colibo-document-extrator
+  repository: itkdev/colibo-docs-extrator
   tag: latest
   pullPolicy: IfNotPresent
 

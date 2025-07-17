@@ -29,7 +29,7 @@ spec:
             - name: {{ .Chart.Name }}
               image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
               imagePullPolicy: {{ .Values.image.pullPolicy }}
-              args: { { .Values.args | default (list "--help") | toJson } }
+              args: {{ .Values.args | default (list "--help") | toJson }}
               env:
                 {{- if .Values.env }}
                   {{- toYaml .Values.env | nindent 16 }}
