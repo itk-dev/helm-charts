@@ -33,6 +33,8 @@ spec:
               env:
                 - name: DATABASE_URL
                   value: "{{ .Values.app.databaseUrl }}"
+                - name: COLIBO_BASE_URL
+                  value: {{ .Values.app.colibo.url }}
                 - name: COLIBO_CLIENT_ID
                   {{- if .Values.app.colibo.client.existingSecret}}
                   valueFrom:
