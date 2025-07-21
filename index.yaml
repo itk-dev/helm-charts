@@ -3,6 +3,17 @@ entries:
   colibo-docs-extractor:
   - apiVersion: v2
     appVersion: 0.0.2
+    created: "2025-07-21T14:10:53.151351331Z"
+    description: A Helm chart for running the Colibo document extractor as a cronjob
+    digest: cdb4a120ef1e3789beee8cf7802119e66a69d28ff12797619c2bd52a28cbe097
+    icon: https://avatars.githubusercontent.com/u/33924554?s=200&v=4
+    name: colibo-docs-extractor
+    type: application
+    urls:
+    - https://github.com/itk-dev/helm-charts/releases/download/colibo-docs-extractor-0.0.5/colibo-docs-extractor-0.0.5.tgz
+    version: 0.0.5
+  - apiVersion: v2
+    appVersion: 0.0.2
     created: "2025-07-21T13:00:26.93530617Z"
     description: A Helm chart for running the Colibo document extractor as a cronjob
     digest: 0f9e6d3e3da003d05c025c1d87bcae71c3c49e6ea3ff77fa84348c3700abc99b
@@ -157,4 +168,4 @@ entries:
     urls:
     - https://github.com/itk-dev/helm-charts/releases/download/litellm-helm-0.0.1/litellm-helm-0.0.1.tgz
     version: 0.0.1
-generated: "2025-07-21T13:00:26.935330195Z"
+generated: "2025-07-21T14:10:53.151379624Z"
