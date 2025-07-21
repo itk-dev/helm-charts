@@ -51,4 +51,3 @@ jobs:
         run: |
           kubectl create namespace test-namespace
           kubectl apply --namespace test-namespace -f template.yaml
-          kubectl wait --namespace test-namespace pod/litellm-0 --for=condition=Ready --timeout=600s

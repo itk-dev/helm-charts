@@ -30,7 +30,7 @@ volumes:
       enabled: true
       existingClaim: ""
       storageClassName: ""
-      size: 10mb
+      size: 10Mi
     # Or use emptyDir for non-persistent storage
     emptyDir:
       enabled: false
