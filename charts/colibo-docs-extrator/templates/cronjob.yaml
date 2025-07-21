@@ -31,35 +31,61 @@ spec:
               imagePullPolicy: {{ .Values.image.pullPolicy }}
               args: {{ .Values.args | default (list "--help") | toJson }}
               env:
+                - name: DATABASE_URL
+                  value: "{{ .Values.app.databaseUrl }}"
+                - name: COLIBO_CLIENT_ID
+                  {{- if .Values.app.colibo.client.existingSecret}}
+                  valueFrom:
+                    secretKeyRef:
+                      name: {{ .Values.app.colibo.client.existingSecret }}
+                      key: {{ .Values.app.colibo.client.idKey }}
+                  {{- else}}
+                  value: "{{ .Values.app.colibo.client.id }}"
+                  {{- end}}
+                - name: COLIBO_CLIENT_SECRET
+                  {{- if .Values.app.colibo.client.existingSecret }}
+                  valueFrom:
+                    secretKeyRef:
+                      name: {{.Values.app.colibo.client.existingSecret }}
+                      key: {{ .Values.app.colibo.client.secretKey }}
+                  {{- else}}
+                  value: "{{ .Values.app.colibo.client.secret }}"
+                  {{- end}}
+                - name: COLIBO_SCOPE
+                  value: "{{ .Values.app.colibo.scope }}"
+                - name: WEBUI_BASE_URL
+                  value: "{{ .Values.app.webui.url }}"
+                - name: WEBUI_TOKEN
+                  {{- if .Values.app.webui.client.existingSecret }}
+                  valueFrom:
+                    secretKeyRef:
+                      name: {{.Values.app.webui.client.existingSecret }}
+                      key: {{ .Values.app.webui.client.tokenKey }}
+                  {{- else}}
+                  value: "{{ .Values.app.webui.client.token }}"
+                  {{- end}}
+                - name: WEBUI_KNOWLEDGE_ID
+                  {{- if .Values.app.webui.client.existingSecret }}
+                  valueFrom:
+                    secretKeyRef:
+                      name: {{.Values.app.webui.client.existingSecret }}
+                      key: {{ .Values.app.webui.client.knowledgeKey }}
+                  {{- else}}
+                  value: "{{ .Values.app.webui.client.knowledgeId }}"
+                  {{- end}}
+                - name: COLIBO_ROOT_DOC_ID
+                  value: "{{ .Values.app.colibo.rootDocIid }}"
                 {{- if .Values.env }}
                   {{- toYaml .Values.env | nindent 16 }}
                 {{- end }}
               resources:
                 {{- toYaml .Values.resources | nindent 16 }}
               volumeMounts:
-                {{- if .Values.volumes.envFile.enabled }}
-                - name: env-file
-                  mountPath: /app/.env
-                  subPath: .env
-                {{- end }}
                 {{- if .Values.volumes.syncDb.enabled }}
                 - name: sync-db
-                  mountPath: /app/sync.db
+                  mountPath: {{ .Values.volumes.syncDb.path }}
                 {{- end }}
           volumes:
-            {{- if .Values.volumes.envFile.enabled }}
-            - name: env-file
-              {{- if .Values.volumes.envFile.existingConfigMap }}
-              configMap:
-                name: {{ .Values.volumes.envFile.existingConfigMap }}
-              {{- else if .Values.envSecret.enabled }}
-              secret:
-                secretName: {{ include "colibo-docs-extractor.fullname" . }}-env
-              {{- else }}
-              configMap:
-                name: {{ include "colibo-docs-extractor.fullname" . }}-env
-              {{- end }}
-            {{- end }}
             {{- if .Values.volumes.syncDb.enabled }}
             - name: sync-db
             {{- if .Values.volumes.syncDb.persistentVolumeClaim.enabled }}
@@ -69,8 +95,8 @@ spec:
                 {{- else }}
                 claimName: {{ include "colibo-docs-extractor.fullname" . }}-sync-db
               {{- end }}
-            {{- else if .Values.volumes.syncDb.emptyDir.enabled }}
-            emptyDir: {}
+            {{- else }}
+              emptyDir: {}
             {{- end }}
             {{- end }}
           {{- with .Values.nodeSelector }}

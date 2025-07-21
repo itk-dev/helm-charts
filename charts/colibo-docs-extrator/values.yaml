@@ -17,23 +17,40 @@ resources:
     memory: 256Mi
 
 volumes:
-  envFile:
-    enabled: true
-    # You can either use existing ConfigMap/Secret or provide env file content
-    existingConfigMap: ""
-    envFileContent: ""
-
   syncDb:
     enabled: true
+    path: /app/database
     # Use PVC for persistent storage
     persistentVolumeClaim:
       enabled: true
       existingClaim: ""
       storageClassName: ""
       size: 10Mi
-    # Or use emptyDir for non-persistent storage
-    emptyDir:
-      enabled: false
+
+app:
+  databaseUrl: "sqlite:///database/sync.db"
+  colibo:
+    url: ''
+    rootDocIid: ''
+    scope: 'api Documents.ReadWrite.All'
+    client:
+      # Use existing secret and keys in that secret
+      existingSecret: ''
+      idKey: ''
+      secretKey: ''
+      # If not using secret.
+      id: ''
+      secret: ''
+  webui:
+    url: ''
+    client:
+      # Use existing secret and keys in that secret
+      existingSecret: ''
+      tokenKey: ''
+      knowledgeKey: ''
+      # If not using secret.
+      token: ''
+      knowledgeId: ''
 
 env: []
 # - name: EXAMPLE_VAR
