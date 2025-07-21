@@ -61,12 +61,6 @@ env: []
 #       name: my-secret
 #       key: secret-key
 
-# If you want to store .env file content as a Secret
-envSecret:
-  enabled: false
-  # content is base64 encoded content of .env file
-  content: ""
-
 # If you need to pull image from private registry
 imagePullSecrets: []
 # - name: regcred
