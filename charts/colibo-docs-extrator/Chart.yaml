@@ -2,6 +2,6 @@ apiVersion: v2
 name: colibo-docs-extractor
 description: A Helm chart for running the Colibo document extractor as a cronjob
 type: application
-version: 0.0.3
+version: 0.0.4
 appVersion: 0.0.2
 icon: https://avatars.githubusercontent.com/u/33924554?s=200&v=4
