@@ -43,6 +43,29 @@ entries:
     urls:
     - https://github.com/itk-dev/helm-charts/releases/download/colibo-docs-extractor-0.0.1/colibo-docs-extractor-0.0.1.tgz
     version: 0.0.1
+  doc-ingestion:
+  - annotations:
+      licenses: MIT
+    apiVersion: v2
+    appVersion: 0.0.2
+    created: "2025-09-16T09:11:40.136798774Z"
+    description: Route document loading requests from OpenWebUI to a text extraction
+      service.
+    digest: 0093a1c3d814d7cb9bc53affabddbb6a423cf3aa13213d447b6a9e4deeb5b3b3
+    home: https://github.com/ai-platform-infrastructure/doc_ingestion_router
+    keywords:
+    - document
+    - processing
+    - pdf
+    - extraction
+    - ai
+    name: doc-ingestion
+    sources:
+    - https://github.com/ai-platform-infrastructure/doc_ingestion_router
+    type: application
+    urls:
+    - https://github.com/itk-dev/helm-charts/releases/download/doc-ingestion-0.0.2/doc-ingestion-0.0.2.tgz
+    version: 0.0.2
   docling:
   - annotations:
       licenses: MIT
@@ -168,4 +191,4 @@ entries:
     urls:
     - https://github.com/itk-dev/helm-charts/releases/download/litellm-helm-0.0.1/litellm-helm-0.0.1.tgz
     version: 0.0.1
-generated: "2025-07-21T14:10:53.151379624Z"
+generated: "2025-09-16T09:11:40.136826686Z"
