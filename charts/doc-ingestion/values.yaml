@@ -58,10 +58,19 @@ config:
   # Doc Ingestion Router name
   APP_NAME: "Document Ingestion Router"
   # API key used for authentication from open-webui.
+  # Use existing secret and key in that secret
+  apiKeyExistingSecret: ''
+  apiKeyExistingSecretKey: 'api-key'
+  # If not using secret, specify the API key directly (not recommended for production)
   API_KEY: "sk-12345678"
   # Tika base url (location of tika server)
   TIKA_BASE_URL: "http://tika:9998"
   # Basic auth credentials for Tika server.
+  # Use existing secret and keys in that secret for Tika credentials
+  tikaExistingSecret: ''
+  tikaUserKey: 'tika-user'
+  tikaExistingSecretPasswordKey: 'tika-password'
+  # If not using secret, specify credentials directly (not recommended for production)
   TIKA_USER: ''
   TIKA_PASSWORD: ''
   # Additional environment variables

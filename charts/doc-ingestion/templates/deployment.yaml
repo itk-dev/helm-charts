@@ -28,6 +28,28 @@ spec:
         envFrom:
           - configMapRef:
               name: {{ include "doc-ingestion.fullname" . }}-config
+        {{- if or .Values.config.apiKeyExistingSecret .Values.config.tikaExistingSecret}}
+        env:
+          {{- if .Values.config.apiKeyExistingSecret }}
+          - name: API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.apiKeyExistingSecret }}
+                key: {{ .Values.config.apiKeyExistingSecretKey }}
+          {{- end }}
+          {{- if .Values.config.tikaExistingSecret }}
+          - name: TIKA_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.tikaExistingSecret }}
+                key: {{ .Values.config.tikaUserKey }}
+          - name: TIKA_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.tikaExistingSecret }}
+                key: {{ .Values.config.tikaPasswordKey }}
+          {{- end }}
+        {{- end }}
         resources:
           {{- toYaml .Values.resources | nindent 10 }}
         readinessProbe:
