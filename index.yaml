@@ -47,6 +47,28 @@ entries:
   - annotations:
       licenses: MIT
     apiVersion: v2
+    appVersion: 0.0.3
+    created: "2025-09-16T11:05:59.022119038Z"
+    description: Route document loading requests from OpenWebUI to a text extraction
+      service.
+    digest: 34a8059db7d5223b89f7c3d919e9a1577493c7c3ff83e46bba1a75df5551fd5f
+    home: https://github.com/ai-platform-infrastructure/doc_ingestion_router
+    keywords:
+    - document
+    - processing
+    - pdf
+    - extraction
+    - ai
+    name: doc-ingestion
+    sources:
+    - https://github.com/ai-platform-infrastructure/doc_ingestion_router
+    type: application
+    urls:
+    - https://github.com/itk-dev/helm-charts/releases/download/doc-ingestion-0.0.3/doc-ingestion-0.0.3.tgz
+    version: 0.0.3
+  - annotations:
+      licenses: MIT
+    apiVersion: v2
     appVersion: 0.0.2
     created: "2025-09-16T09:11:40.136798774Z"
     description: Route document loading requests from OpenWebUI to a text extraction
@@ -191,4 +213,4 @@ entries:
     urls:
     - https://github.com/itk-dev/helm-charts/releases/download/litellm-helm-0.0.1/litellm-helm-0.0.1.tgz
     version: 0.0.1
-generated: "2025-09-16T09:11:40.136826686Z"
+generated: "2025-09-16T11:05:59.02214687Z"
