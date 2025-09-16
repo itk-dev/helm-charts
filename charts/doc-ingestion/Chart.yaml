@@ -2,8 +2,8 @@ apiVersion: v2
 name: doc-ingestion
 description: Route document loading requests from OpenWebUI to a text extraction service.
 type: application
-version: 0.0.2
-appVersion: "0.0.2"
+version: 0.0.3
+appVersion: "0.0.3"
 home: https://github.com/ai-platform-infrastructure/doc_ingestion_router
 sources:
   - https://github.com/ai-platform-infrastructure/doc_ingestion_router

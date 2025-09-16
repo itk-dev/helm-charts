@@ -16,7 +16,7 @@ fullnameOverride: ""
 # Image configuration
 image:
   repository: itkdev/doc-ingestion-route
-  tag: "0.0.2"
+  tag: "0.0.3"
   pullPolicy: IfNotPresent
 
 # Replica configuration
