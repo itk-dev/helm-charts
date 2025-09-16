@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "doc-ingestion.fullname" . }}
+  namespace: {{ include "doc-ingestion.namespace" . }}
+  labels:
+    {{- include "doc-ingestion.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+  - port: {{ .Values.service.port }}
+    targetPort: {{ .Values.service.targetPort }}
+    protocol: TCP
+    name: http
+  selector:
+    {{- include "doc-ingestion.selectorLabels" . | nindent 4 }}
