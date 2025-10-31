@@ -46,6 +46,11 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          volumeMounts:
+            - name: config
+              mountPath: /etc/searxng/settings.yml
+              subPath: settings.yml
+              readOnly: true
           livenessProbe:
             {{- toYaml .Values.probes.liveness | nindent 12}}
           readinessProbe:
@@ -54,6 +59,10 @@ spec:
             {{- toYaml .Values.probes.startup | nindent 12}}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: config
+          configMap:
+            name: {{ include "searxng.fullname" . }}-config
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
