@@ -14,8 +14,3 @@ sources:
   - https://github.com/searxng/searxng
   - https://docs.searxng.org
   - https://hub.docker.com/r/searxng/searxng
-dependencies:
-  - name: redis
-    version: 0.16.7
-    repository: https://ot-container-kit.github.io/helm-charts
-    condition: redis.enabled

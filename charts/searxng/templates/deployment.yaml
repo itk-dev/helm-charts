@@ -47,20 +47,11 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           livenessProbe:
-            httpGet:
-              path: /healthz
-              port: http
+            {{- toYaml .Values.probes.liveness | nindent 12}}
           readinessProbe:
-            httpGet:
-              path: /healthz
-              port: http
-          # Give the container time to start up.  Up to 5 minutes (10 * 30 seconds)
+            {{- toYaml .Values.probes.readiness | nindent 12}}
           startupProbe:
-            httpGet:
-              path: /healthz
-              port: http
-            failureThreshold: 30
-            periodSeconds: 10
+            {{- toYaml .Values.probes.startup | nindent 12}}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
