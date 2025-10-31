@@ -87,56 +87,20 @@ persistence:
     retain: false
 
 ingress:
-  main:
-    # -- Enables or disables the ingress
-    enabled: false
-
-    # -- Make this the primary ingress (used in probes, notes, etc...).
-    # If there is more than 1 ingress, make sure that only 1 ingress is marked as primary.
-    primary: true
-
-    # -- Override the name suffix that is used for this ingress.
-    nameOverride:
-
-    # -- Provide additional annotations which may be required.
-    annotations: { }
+  enabled: false
+  className: "nginx"
+  annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
-
-    # -- Provide additional labels which may be required.
-    labels: { }
-
-    # -- Set the ingressClass that is used for this ingress.
-    # Requires Kubernetes >=1.19
-    ingressClassName:  # "nginx"
-
-    ## Configure the hosts for the ingress
-    hosts:
-      - # -- Host address. Helm template can be passed.
-        host: chart-example.local
-        ## Configure the paths for the host
-        paths:
-          - # -- Path.  Helm template can be passed.
-            path: /
-            # -- Ignored if not kubeVersion >= 1.14-0
-            pathType: Prefix
-            service:
-              # -- Overrides the service name reference for this path
-              name:
-              # -- Overrides the service port reference for this path
-              port:
-
-    # -- Configure TLS for the ingress. Both secretName and hosts can process a Helm template.
-    tls: [ ]
-    #  - secretName: chart-example-tls
-    #    hosts:
-    #      - chart-example.local
-
-searxng:
-  config:
-    use_default_settings: true
-    server:
-      secret_key: pleasechangeme
+  hosts:
+    - host: api.example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
 
 probes:
   readiness:
