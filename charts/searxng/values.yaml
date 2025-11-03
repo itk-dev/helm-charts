@@ -20,71 +20,58 @@ podLabels: {}
 # Explanation about each environment variables here:
 # https://docs.searxng.org/admin/installation-docker.html#command-line
 env:
-  INSTANCE_NAME: "my-instance"
-  BASE_URL: "http://localhost:8080/"
-  AUTOCOMPLETE: "false"
-  # MORTY_URL: "http://morty:8080"
-  # MORTY_KEY: "mysecretkey"
-  # BIND_ADDRESS: "0.0.0.0:8080"
+  - name: SEARXNG_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: searxng-secrets
+        key: SEARXNG_SECRET
+  - name: SEARXNG_METHOD
+    value: "POST"
 
 service:
   type: ClusterIP
   port: 8080
-  # If service type is `LoadBalancer` you can
-  # optionally specify loadBalancerClass
-  # loadBalancerClass: tailscale
 
-serviceAccount:
-  # Specifies whether a service account should be created
-  create: false
-  # Automatically mount a ServiceAccount's API credentials?
-  automount: true
-  # Annotations to add to the service account
-  annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: ""
-
-persistence:
-  config:
-    # -- Enables or disables the persistence item
-    enabled: false
-
-    # -- Sets the persistence type
-    # Valid options are pvc, emptyDir, hostPath, secret, configMap or custom
-    type: pvc
-
-    # -- Where to mount the volume in the main container.
-    # Defaults to `/<name_of_the_volume>`,
-    # setting to '-' creates the volume but disables the volumeMount.
-    mountPath:  # /config
-    # -- Specify if the volume should be mounted read-only.
-    readOnly: false
-    # -- Override the name suffix that is used for this volume.
-    nameOverride:
-
-    # -- Storage Class for the config volume.
-    # If set to `-`, dynamic provisioning is disabled.
-    # If set to something else, the given storageClass is used.
-    # If undefined (the default) or set to null, no storageClassName spec is set, choosing the default provisioner.
-    storageClass:  # "-"
-
-    # -- If you want to reuse an existing claim, the name of the existing PVC can be passed here.
-    existingClaim:  # your-claim
-
-    # -- Used in conjunction with `existingClaim`. Specifies a sub-path inside the referenced volume instead of its root
-    subPath:  # some-subpath
-
-    # -- AccessMode for the persistent volume.
-    # Make sure to select an access mode that is supported by your storage provider!
-    # [[ref]](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)
-    accessMode: ReadWriteOnce
-
-    # -- The amount of storage that is requested for the persistent volume.
-    size: 1Gi
-
-    # -- Set to true to retain the PVC upon `helm uninstall`
-    retain: false
+#persistence:
+#  config:
+#    # -- Enables or disables the persistence item
+#    enabled: false
+#
+#    # -- Sets the persistence type
+#    # Valid options are pvc, emptyDir, hostPath, secret, configMap or custom
+#    type: pvc
+#
+#    # -- Where to mount the volume in the main container.
+#    # Defaults to `/<name_of_the_volume>`,
+#    # setting to '-' creates the volume but disables the volumeMount.
+#    mountPath:  # /config
+#    # -- Specify if the volume should be mounted read-only.
+#    readOnly: false
+#    # -- Override the name suffix that is used for this volume.
+#    nameOverride:
+#
+#    # -- Storage Class for the config volume.
+#    # If set to `-`, dynamic provisioning is disabled.
+#    # If set to something else, the given storageClass is used.
+#    # If undefined (the default) or set to null, no storageClassName spec is set, choosing the default provisioner.
+#    storageClass:  # "-"
+#
+#    # -- If you want to reuse an existing claim, the name of the existing PVC can be passed here.
+#    existingClaim:  # your-claim
+#
+#    # -- Used in conjunction with `existingClaim`. Specifies a sub-path inside the referenced volume instead of its root
+#    subPath:  # some-subpath
+#
+#    # -- AccessMode for the persistent volume.
+#    # Make sure to select an access mode that is supported by your storage provider!
+#    # [[ref]](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)
+#    accessMode: ReadWriteOnce
+#
+#    # -- The amount of storage that is requested for the persistent volume.
+#    size: 1Gi
+#
+#    # -- Set to true to retain the PVC upon `helm uninstall`
+#    retain: false
 
 ingress:
   enabled: false
@@ -126,29 +113,6 @@ autoscaling:
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
-
-# -- Configure configMaps for the chart here.
-# Additional configMaps can be added by adding a dictionary key similar to the 'config' object.
-# @default -- See below
-configmap:
-  config:
-    # -- Enables or disables the configMap
-    enabled: false
-    # -- Labels to add to the configMap
-    labels: {}
-    # -- Annotations to add to the configMap
-    annotations: {}
-    # -- configMap data content. Helm template enabled.
-    data: {}
-      # foo: bar
-
-# -- Secrets and/or ConfigMaps that will be loaded as environment variables.
-# [[ref]](https://unofficial-kubernetes.readthedocs.io/en/latest/tasks/configure-pod-container/configmap/#use-case-consume-configmap-in-environment-variables)
-envFrom: []
-# - configMapRef:
-#     name: config-map-name
-# - secretRef:
-#     name: secret-name
 
 # -- Configure the Security Context for the Pod
 podSecurityContext: {}
