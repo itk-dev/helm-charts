@@ -77,6 +77,7 @@ spec:
             claimName: {{ .Values.persistence.existingClaim | default (printf "%s-pvc" (include "searxng.fullname" .)) }}
           {{- else if eq .Values.persistence.type "emptyDir" }}
           emptyDir: { }
+          {{- end }}
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
