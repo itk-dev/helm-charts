@@ -213,4 +213,26 @@ entries:
     urls:
     - https://github.com/itk-dev/helm-charts/releases/download/litellm-helm-0.0.1/litellm-helm-0.0.1.tgz
     version: 0.0.1
-generated: "2025-09-16T11:05:59.02214687Z"
+  searxng:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2025-11-03T10:07:36.472552937Z"
+    description: SearXNG is a free internet metasearch engine which aggregates results
+      from various search services and databases.
+    digest: d864f198dd76e7a63a6b03d45ebd5d1926250eda2b08afa416ac60a20bb56dbb
+    icon: https://github.com/searxng/searxng/blob/master/searx/static/themes/simple/img/favicon.png?raw=true
+    keywords:
+    - searx
+    - searxng
+    - search engine
+    - privacy
+    name: searxng
+    sources:
+    - https://github.com/searxng/searxng
+    - https://docs.searxng.org
+    - https://hub.docker.com/r/searxng/searxng
+    type: application
+    urls:
+    - https://github.com/itk-dev/helm-charts/releases/download/searxng-1.0.0/searxng-1.0.0.tgz
+    version: 1.0.0
+generated: "2025-11-03T10:07:36.472585337Z"
