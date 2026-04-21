@@ -216,6 +216,27 @@ entries:
   searxng:
   - apiVersion: v2
     appVersion: latest
+    created: "2026-04-21T11:39:21.439713498Z"
+    description: SearXNG is a free internet metasearch engine which aggregates results
+      from various search services and databases.
+    digest: ca7443e29a43995bcbedd9d4cd893e928eb71ddc0377b80d9c66cf65fdad52f6
+    icon: https://github.com/searxng/searxng/blob/master/searx/static/themes/simple/img/favicon.png?raw=true
+    keywords:
+    - searx
+    - searxng
+    - search engine
+    - privacy
+    name: searxng
+    sources:
+    - https://github.com/searxng/searxng
+    - https://docs.searxng.org
+    - https://hub.docker.com/r/searxng/searxng
+    type: application
+    urls:
+    - https://github.com/itk-dev/helm-charts/releases/download/searxng-1.0.2/searxng-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
+    appVersion: latest
     created: "2025-11-03T10:59:28.9422867Z"
     description: SearXNG is a free internet metasearch engine which aggregates results
       from various search services and databases.
@@ -256,4 +277,4 @@ entries:
     urls:
     - https://github.com/itk-dev/helm-charts/releases/download/searxng-1.0.0/searxng-1.0.0.tgz
     version: 1.0.0
-generated: "2025-11-03T10:59:28.942316897Z"
+generated: "2026-04-21T11:39:21.439737725Z"
